@@ -1,0 +1,5 @@
+forntend/node_modules
+backend/node_modules
+
+frotend/.env
+backend/.env

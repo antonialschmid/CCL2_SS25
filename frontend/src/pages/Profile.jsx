@@ -1,27 +1,47 @@
-import { useEffect, useState } from "react";
-export default function Profile() {
+// src/pages/Profile.jsx
+import React, { useEffect, useState } from 'react';
+import axios from '../services/axiosConfig';
+
+function Profile() {
+    const [profile, setProfile] = useState(null);
     const [letters, setLetters] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        fetch("http://localhost:3001/letters/me", {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((res) => res.json())
-            .then((data) => setLetters(data));
+        const fetchProfileData = async () => {
+            try {
+                const userRes = await axios.get('/users/profile');
+                const lettersRes = await axios.get('/letters/me');
+                setProfile(userRes.data);
+                setLetters(lettersRes.data);
+            } catch (err) {
+                console.error('Error fetching profile data:', err);
+            }
+        };
+
+        fetchProfileData();
     }, []);
 
+    if (!profile) return <div>Loading...</div>;
+
     return (
-        <div>
-            <h2>My Letters</h2>
-            {letters.map((letter, index) => (
-                <div key={index}>
-                    <h3>{letter.title}</h3>
-                    <p>{letter.body_part}</p>
-                    <p>{letter.content}</p>
-                    <hr />
-                </div>
-            ))}
+        <div className="profile">
+            <h1>{profile.name}</h1>
+            <p><strong>Email:</strong> {profile.email}</p>
+            {profile.bio && <p><strong>About you:</strong> {profile.bio}</p>}
+            <p><strong>Letters written:</strong> {letters.length}</p>
+            <p><strong>Part of this space since:</strong> {new Date(profile.created_at).toLocaleDateString()}</p>
+
+            {/* Optional buttons */}
+            <div style={{ marginTop: '20px' }}>
+                <button onClick={() => window.location.href = '/write'}>Write a Letter</button>
+                <button onClick={() => window.location.href = '/read'}>Read Letters</button>
+                <button onClick={() => {
+                    localStorage.removeItem('token');
+                    window.location.href = '/login';
+                }}>Logout</button>
+            </div>
         </div>
     );
 }
+
+export default Profile;

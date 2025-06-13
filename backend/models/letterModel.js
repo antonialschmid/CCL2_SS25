@@ -1,4 +1,4 @@
-const db = require('../services/database');
+const db = require('../services/database').config;
 
 // 📨 Alle Briefe (öffentlich)
 exports.getAllLetters = async () => {

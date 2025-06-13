@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
-export default function App() {
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';        // ⬅️ new
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+
+function App() {
     return (
-        <div>
-            <h1>Dear Body</h1>
-            <nav>
-                <Link to="/read">Read Letters</Link> | {" "}
-                <Link to="/write">Write a Letter</Link> | {" "}
-                <Link to="/profile">Profile</Link> | {" "}
-                <Link to="/login">Login</Link> | {" "}
-                <Link to="/register">Register</Link>
-            </nav>
-        </div>
+        <Routes>
+            <Route path="/" element={<Home />} />       {/* ⬅️ here */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
     );
 }
+
+export default App;

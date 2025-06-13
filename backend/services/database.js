@@ -1,14 +1,15 @@
-//MySQL + .env laden
-const mysql = require("mysql2/promise");
 require("dotenv").config();
+const mysql = require("mysql2");
 
-//Connection
+
 const config = mysql.createConnection({
     host: 'atp.fhstp.ac.at',
     port: 8007,
-    user: process.env.DB_USERNAME,
+    user: 'cc241073',
     password: process.env.DB_PASSWORD,
-    database: 'cc241073'
+    database: 'cc241073',
+    waitForConnections: true,
+    connectionLimit: 10,
 
 });
 
@@ -20,5 +21,4 @@ config.connect((err) => {
     }
 });
 
-//exporting the connection configuration
 module.exports = {config};

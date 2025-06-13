@@ -4,15 +4,17 @@ const {
     getAllLetters,
     getUserLetters,
     createLetter,
+    resonateLetter
 } = require("../controllers/letterController");
 
-const { verifyToken } = require("../services/authentication");
+const { authenticateJWT } = require("../services/authentication"); // renaming for consistency
 
+// Public – anyone can view all letters
+router.get("/allLetters", getAllLetters);
 
-router.get("/", getAllLetters);
-
-//protected
-router.get("/me", verifyToken, getUserLetters);
-router.post("/", verifyToken, createLetter);
+// Protected – only logged-in users can do the following
+router.get("/me", authenticateJWT, getUserLetters);
+router.post("/", authenticateJWT, createLetter);
+router.put("/:id/resonate", authenticateJWT, resonateLetter);
 
 module.exports = router;

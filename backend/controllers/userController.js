@@ -1,90 +1,80 @@
-const db = require('../services/database');
+const userModel = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// register
+// Register a new user
 exports.register = async (req, res) => {
     const { name, email, password } = req.body;
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        await db.query(
-            'INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)',
-            [name, email, hashedPassword]
-        );
-
-        res.status(201).json({ message: 'User registered successfully' });
+        const userId = await userModel.registerUser({ name, email, password });
+        res.status(201).json({ message: 'User registered successfully', id: userId });
     } catch (err) {
-        console.error('Registration failed:', err);
+        console.error('[register]', err.message);
         res.status(500).json({ error: 'Registration failed' });
     }
 };
 
-//Login (get Token)
+//Log in and return JWT token
+const { checkPassword, createToken } = require('../services/authentication');
+
 exports.login = async (req, res) => {
     const { email, password } = req.body;
-
     try {
-        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-        const user = rows[0];
+        const user = await userModel.getUserByEmail(email);
+        if (!user) return res.status(401).json({ error: 'No user found' });
 
-        if (!user) {
-            return res.status(401).json({ error: 'No user found' });
-        }
+        const match = await checkPassword(password, user.password_hash);
+        if (!match) return res.status(401).json({ error: 'Incorrect password' });
 
-        const passwordMatch = await bcrypt.compare(password, user.password_hash);
-        if (!passwordMatch) {
-            return res.status(401).json({ error: 'Incorrect password' });
-        }
-
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.json({ token });
+        const token = createToken(user);
+        res.json({ token }); // ⬅️ Frontend saves this in localStorage
     } catch (err) {
-        console.error('Login failed:', err);
+        console.error('[login]', err.message);
         res.status(500).json({ error: 'Login failed' });
     }
 };
 
-// show profile
+// Get current user's profile
 exports.getProfile = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const [rows] = await db.query('SELECT id, name, email, bio FROM users WHERE id = ?', [userId]);
-        res.json(rows[0]);
+        const user = await userModel.getUser(userId);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        // Return only selected fields
+        const { id, name, email, bio, created_at } = user;
+        res.json({ id, name, email, bio, created_at });
     } catch (err) {
-        console.error('Profile fetch failed:', err);
-        res.status(500).json({ error: 'Profile fetch failed' });
+        console.error('[getProfile]', err.message);
+        res.status(500).json({ error: 'Could not fetch profile' });
     }
 };
 
-//update user Profile
+//Update current user's profile
 exports.updateProfile = async (req, res) => {
     const userId = req.user.id;
-    const { name, bio } = req.body;
+    const { name, email, bio, password } = req.body;
 
     try {
-        await db.query(
-            'UPDATE users SET name = ?, bio = ? WHERE id = ?',
-            [name, bio, userId]
-        );
-        res.json({ message: 'Profile updated' });
+        await userModel.updateUser({ id: userId, name, email, bio, password });
+        res.json({ message: 'Profile updated successfully' });
     } catch (err) {
-        console.error('Profile update failed:', err);
-        res.status(500).json({ error: 'Update failed' });
+        console.error('[updateProfile]', err.message);
+        res.status(500).json({ error: 'Profile update failed' });
     }
 };
 
-// delete user
+//Delete current user's account
 exports.deleteUser = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        await db.query('DELETE FROM users WHERE id = ?', [userId]);
+        await userModel.deleteUser(userId);
         res.json({ message: 'User deleted' });
     } catch (err) {
-        console.error('Delete failed:', err);
+        console.error('[deleteUser]', err.message);
         res.status(500).json({ error: 'Delete failed' });
     }
 };

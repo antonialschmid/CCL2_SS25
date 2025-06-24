@@ -1,8 +1,9 @@
+// services/database.js
+
 require("dotenv").config();
 const mysql = require("mysql2");
 
-
-const config = mysql.createConnection({
+const pool = mysql.createPool({
     host: 'atp.fhstp.ac.at',
     port: 8007,
     user: 'cc241073',
@@ -10,15 +11,8 @@ const config = mysql.createConnection({
     database: 'cc241073',
     waitForConnections: true,
     connectionLimit: 10,
-
+    queueLimit: 0
 });
 
-config.connect((err) => {
-    if (err) {
-        throw err;
-    } else {
-        console.log('Connected to database');
-    }
-});
-
-module.exports = {config};
+// Exportiere direkt die Promise-Version:
+module.exports = pool.promise();

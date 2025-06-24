@@ -1,20 +1,26 @@
 const express = require("express");
 const router = express.Router();
+
 const {
     getAllLetters,
-    getUserLetters,
+    getLetterById,
     createLetter,
-    resonateLetter
+    getUserLetters,
+    incrementResonate, // ✅ richtige Funktion
+    getAllLettersAdmin,
+    deleteLetter    // ✅ korrekt importiert
 } = require("../controllers/letterController");
 
-const { authenticateJWT } = require("../services/authentication"); // renaming for consistency
+const { authenticateJWT, checkAdmin } = require("../services/authentication");
 
-// Public – anyone can view all letters
-router.get("/allLetters", getAllLetters);
-
-// Protected – only logged-in users can do the following
+// Reihenfolge: erst spezifischere, dann generelle!
+router.get("/", getAllLetters);
 router.get("/me", authenticateJWT, getUserLetters);
+router.get("/admin/all", authenticateJWT, checkAdmin, getAllLettersAdmin);
+router.get("/:id", getLetterById);
+
 router.post("/", authenticateJWT, createLetter);
-router.put("/:id/resonate", authenticateJWT, resonateLetter);
+router.put("/:id/resonate", authenticateJWT, incrementResonate);
+router.delete("/:id", authenticateJWT, checkAdmin, deleteLetter); // ✅ jetzt korrekt
 
 module.exports = router;

@@ -2,7 +2,7 @@
 const db = require('../services/database');
 const bcrypt = require('bcrypt');
 
-// ✅ Alle User (Admin Panel)
+//  Alle User (Admin Panel)
 exports.getUsers = async () => {
     const conn = await db;
     const [rows] = await conn.query(
@@ -11,7 +11,7 @@ exports.getUsers = async () => {
     return rows;
 };
 
-// ✅ Einzelner User (für Profil)
+//  Einzelner User (für Profil)
 exports.getUser = async (id) => {
     const conn = await db;
     const [rows] = await conn.query(
@@ -21,7 +21,7 @@ exports.getUser = async (id) => {
     return rows[0] || null;
 };
 
-// ✅ User nach Email (für Login)
+//  User nach Email (für Login)
 exports.getUserByEmail = async (email) => {
     const conn = await db;
     const [rows] = await conn.query(
@@ -31,7 +31,7 @@ exports.getUserByEmail = async (email) => {
     return rows[0] || null;
 };
 
-// ✅ Registrierung — standardmäßig is_admin = false
+//  Registrierung — standardmäßig is_admin = false
 exports.registerUser = async ({ username, email, password }) => {
     const conn = await db;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -42,7 +42,7 @@ exports.registerUser = async ({ username, email, password }) => {
     return result.insertId;
 };
 
-// ✅ Profil-Update — Passwort optional!
+//  Profil-Update — Passwort optional!
 exports.updateUser = async ({ id, username, email, bio, password }) => {  // ✅ FIX: username!
     const conn = await db;
     if (password) {
@@ -60,7 +60,7 @@ exports.updateUser = async ({ id, username, email, bio, password }) => {  // ✅
     return true;
 };
 
-// ✅ User löschen (User oder Admin)
+//  User löschen (User oder Admin)
 exports.deleteUser = async (id) => {
     const conn = await db;
     await conn.query(

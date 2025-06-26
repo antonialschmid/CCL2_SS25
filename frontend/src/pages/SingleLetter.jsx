@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "../services/axiosConfig";
-import "./1234.css";
+import "./styles.css";
 import flowerImage from "../assets/flower.png";
 
 export default function SingleLetter() {
@@ -14,7 +14,7 @@ export default function SingleLetter() {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // ✅ Fetch letter + profile on mount
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -83,7 +83,7 @@ export default function SingleLetter() {
 
     return (
         <div className="home">
-            {/* ✅ Smart Logo */}
+
             <header className="header">
                 <Link to={isLoggedIn ? "/home-loggedin" : "/"}>DEAR BODY</Link>
             </header>

@@ -14,16 +14,16 @@ const {
 const { authenticateJWT, checkAdmin } = require("../services/authentication");
 const userModel = require("../models/userModel");
 
-// ✅ PUBLIC routes
+//  PUBLIC routes
 router.post("/register", register);
 router.post("/login", login);
 
-// ✅ USER PROTECTED routes (Owner)
+//  USER PROTECTED routes (Owner)
 router.get("/profile", authenticateJWT, getProfile);
 router.put("/profile", authenticateJWT, updateProfile);
 router.delete("/delete", authenticateJWT, deleteUser);
 
-// ✅ ADMIN routes (nur Admin darf!)
+//  ADMIN routes (nur Admin darf!)
 
 // ➜ Alle User sehen (Admin Panel)
 router.get("/", authenticateJWT, checkAdmin, async (req, res) => {
@@ -36,7 +36,7 @@ router.get("/", authenticateJWT, checkAdmin, async (req, res) => {
     }
 });
 
-// ➜ Einzelnen User löschen (Admin kann jeden killen!)
+
 router.delete("/:id", authenticateJWT, checkAdmin, async (req, res) => {
     try {
         const targetId = req.params.id;

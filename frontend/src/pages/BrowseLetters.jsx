@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../services/axiosConfig";
-import "./1234.css";
+import "./styles.css";
 import flowerImage from "../assets/flower.png";
 
 export default function BrowseLetters() {
@@ -45,7 +45,7 @@ export default function BrowseLetters() {
 
     return (
         <div className="home">
-            {/* ✅ DYNAMISCHES LOGO */}
+
             <header className="header">
                 <Link to={isLoggedIn ? "/home-loggedin" : "/"}>DEAR BODY</Link>
             </header>

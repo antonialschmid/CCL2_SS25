@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import "./1234.css"; // uses your main styling!
+import "./styles.css"; // uses your main styling!
 
 export default function ErrorPage() {
     return (
@@ -18,14 +18,6 @@ export default function ErrorPage() {
                 <Link to="/" className="login-btn">Go back home</Link>
             </main>
 
-            <footer className="footer">
-                <div className="footer-lines">
-                    <div className="footer-line1"></div>
-                    <div className="footer-line"></div>
-                    <div className="footer-line"></div>
-                    <div className="footer-line"></div>
-                </div>
-            </footer>
         </div>
     );
 }

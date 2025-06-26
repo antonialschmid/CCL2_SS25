@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./1234.css";
+import "./styles.css";
 import flowerImage from "../assets/flower.png";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
 
     return (
         <div className="home">
-            {/* ✅ Logo, abhängig vom Login */}
+
             <header className="header">
                 <Link to={isLoggedIn ? "/home-loggedin" : "/"}>DEAR BODY</Link>
             </header>

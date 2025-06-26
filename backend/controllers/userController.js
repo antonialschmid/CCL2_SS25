@@ -3,9 +3,9 @@
 const userModel = require('../models/userModel');
 const { checkPassword, createToken } = require('../services/authentication');
 
-// ✅ REGISTER
+//  REGISTER
 exports.register = async (req, res) => {
-    const { username, email, password } = req.body; // ✅ username!
+    const { username, email, password } = req.body;
     try {
         const userId = await userModel.registerUser({ username, email, password });
         res.status(201).json({ message: "User registered", id: userId });
@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
     }
 };
 
-// ✅ LOGIN
+//  LOGIN
 exports.login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
     }
 };
 
-// ✅ GET PROFILE
+//  GET PROFILE
 exports.getProfile = async (req, res) => {
     const userId = req.user.id;
     try {
@@ -49,7 +49,7 @@ exports.getProfile = async (req, res) => {
     }
 };
 
-// ✅ UPDATE PROFILE
+//  UPDATE PROFILE
 exports.updateProfile = async (req, res) => {
     const userId = req.user.id;
     const { username, email, bio, password } = req.body;
@@ -62,7 +62,7 @@ exports.updateProfile = async (req, res) => {
     }
 };
 
-// ✅ DELETE OWN ACCOUNT
+//  DELETE OWN ACCOUNT
 exports.deleteUser = async (req, res) => {
     const userId = req.user.id;
     try {

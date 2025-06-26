@@ -3,10 +3,9 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-// 🔑 Lade dein Secret aus .env
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
-// ✅ Passwortvergleich (Bcrypt)
+//  Passwortvergleich (Bcrypt)
 async function checkPassword(plainPassword, hashedPassword) {
     try {
         return await bcrypt.compare(plainPassword, hashedPassword);
@@ -16,20 +15,20 @@ async function checkPassword(plainPassword, hashedPassword) {
     }
 }
 
-// ✅ JWT erstellen: speichere is_admin mit rein!
+//  JWT erstellen: speichere is_admin mit rein!
 function createToken(user) {
     return jwt.sign(
         {
             id: user.id,
             name: user.username,
-            is_admin: user.is_admin // <-- Admin-Flag kommt mit rein!
+            is_admin: user.is_admin
         },
         ACCESS_TOKEN_SECRET,
         { expiresIn: '1d' }
     );
 }
 
-// ✅ JWT prüfen & Payload an req.user hängen
+//  JWT prüfen & Payload an req.user hängen
 function authenticateJWT(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader) return res.status(401).json({ error: 'No token provided' });
@@ -42,7 +41,7 @@ function authenticateJWT(req, res, next) {
     });
 }
 
-// ✅ Extra: Nur Admin darf weiter
+//  Extra: Nur Admin darf weiter
 function checkAdmin(req, res, next) {
     if (!req.user?.is_admin) {
         return res.status(403).json({ error: 'Forbidden: Admins only' });
@@ -50,7 +49,7 @@ function checkAdmin(req, res, next) {
     next();
 }
 
-// ✅ Exportiere alles
+
 module.exports = {
     checkPassword,
     createToken,

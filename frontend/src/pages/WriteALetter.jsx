@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../services/axiosConfig";
-import "./1234.css";
+import "./styles.css";
 import flowerImage from "../assets/flower.png";
 
 export default function WriteALetter() {
@@ -12,7 +12,7 @@ export default function WriteALetter() {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // ✅ NEU
 
-    // ✅ Hole Profil-Status (Admin & LoggedIn)
+
     useEffect(() => {
         const fetchProfile = async () => {
             const token = localStorage.getItem("token");
@@ -55,7 +55,7 @@ export default function WriteALetter() {
 
     return (
         <div className="home">
-            {/* ✅ Logo mit smartem Link */}
+
             <header className="header">
                 <Link to={isLoggedIn ? "/home-loggedin" : "/"}>DEAR BODY</Link>
             </header>

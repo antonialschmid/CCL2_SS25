@@ -20,7 +20,7 @@ Deployment process:
 
 ---
 
-2. Source Code Submission
+2.  Source Code Submission
    •	ZIP file of the complete project is submitted on eCampus.
    •	GitLab Repository: 
    •	The GitLab repository includes a README.md explaining:
@@ -148,7 +148,7 @@ Known Issues/Limitations:
 
 words of Honesty: 
 
-tbh im actually very satisfeidy by the website, the thing is im not a hundert perzent up to my first design idea, ehich for me is fine but i know
+tbh I'm actually very satisfied by the website, the thing is im not a hundred percent up to my first design idea, Which for me is fine but I know
 it could be better
 
 ---

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../services/axiosConfig";
-import "./1234.css";
+import "./styles.css";
 import flowerImage from "../assets/flower.png";
 
 export default function Register() {
@@ -38,7 +38,7 @@ export default function Register() {
 
     return (
         <div className="home">
-            {/* ✅ Logo smart */}
+
             <header className="header">
                 <Link to={isLoggedIn ? "/home-loggedin" : "/"}>DEAR BODY</Link>
             </header>

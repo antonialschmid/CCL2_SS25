@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../services/axiosConfig";
-import "./1234.css"; // dein einheitliches CSS
+import "./styles.css"; // dein einheitliches CSS
 import flowerImage from "../assets/flower.png";
 
 export default function Login() {
@@ -39,7 +39,7 @@ export default function Login() {
             </nav>
 
             <main className="main">
-                {/* LEFT: Login Form in gleichem Grid-Bereich wie Intro */}
+
                 <section className="intro">
                     <form onSubmit={handleLogin} className="login-form">
                         <h3>Login</h3>

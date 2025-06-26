@@ -2,7 +2,7 @@
 
 const db = require('../services/database');
 
-// ✅ Öffentliche Liste aller Letters (Feed)
+//  Öffentliche Liste aller Letters (Feed)
 exports.getAllLetters = async () => {
     const [rows] = await db.query(`
         SELECT id, title, body_part, content, created_at,
@@ -13,7 +13,7 @@ exports.getAllLetters = async () => {
     return rows;
 };
 
-// ✅ Einzelner Letter (Detail Page)
+//  Einzelner Letter (Detail Page)
 exports.getLetterById = async (id) => {
     const [rows] = await db.query(`
         SELECT
@@ -30,7 +30,7 @@ exports.getLetterById = async (id) => {
     return rows[0] || null;
 };
 
-// ✅ Liste eigener Letters (nur für eingeloggten User)
+//  Liste eigener Letters (nur für eingeloggten User)
 exports.getUserLetters = async (userId) => {
     const [rows] = await db.query(`
         SELECT
@@ -47,7 +47,7 @@ exports.getUserLetters = async (userId) => {
     return rows;
 };
 
-// ✅ Neues Letter speichern
+//  Neues Letter speichern
 exports.createLetter = async (userId, { title, body_part, content }) => {
     const [result] = await db.query(`
         INSERT INTO lettersDearBody
@@ -57,7 +57,7 @@ exports.createLetter = async (userId, { title, body_part, content }) => {
     return result.insertId;
 };
 
-// ✅ Resonanz hochzählen (Herz-Button)
+//  Resonanz hochzählen (Herz-Button)
 exports.incrementResonate = async (id) => {
     const [result] = await db.query(`
         UPDATE lettersDearBody
@@ -67,7 +67,7 @@ exports.incrementResonate = async (id) => {
     return result.affectedRows > 0;
 };
 
-// ✅ ADMIN: Alle Letters inkl. User Info (Admin Panel)
+//  ADMIN: Alle Letters inkl. User Info (Admin Panel)
 exports.getAllLettersAdmin = async () => {
     const [rows] = await db.query(`
         SELECT

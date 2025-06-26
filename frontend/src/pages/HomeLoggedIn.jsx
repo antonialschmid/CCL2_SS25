@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../services/axiosConfig";
-import "./1234.css";
+import "./styles.css";
 import flowerImage from "../assets/flower.png";
 
 export default function HomeLoggedIn() {
@@ -36,7 +36,7 @@ export default function HomeLoggedIn() {
                 <Link to="/home-loggedin">DEAR BODY</Link>
             </header>
 
-            {/* Nav mit Admin Panel Link */}
+
             <nav>
                 <ul>
                     <li><Link to="/" onClick={handleLogout}>Logout</Link></li>

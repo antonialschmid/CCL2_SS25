@@ -77,7 +77,7 @@ export default function LetterDetail() {
                     <li><Link to="/letters">Letters</Link></li>
                     {isLoggedIn && <li><Link to="/write">Write</Link></li>}
                     {isLoggedIn && <li><Link to="/profile">Profile</Link></li>}
-                    {isAdmin && <li><Link to="/admin">Admin Panel</Link></li>}
+                    {isAdmin && <li><Link to="/admin">Admin</Link></li>}
                 </ul>
             </nav>
 

@@ -96,7 +96,7 @@ export default function SingleLetter() {
                             <li><Link to="/letters">Letters</Link></li>
                             <li><Link to="/write">Write</Link></li>
                             <li><Link to="/profile">Profile</Link></li>
-                            {isAdmin && <li><Link to="/admin">Admin Panel</Link></li>}
+                            {isAdmin && <li><Link to="/admin">Admin</Link></li>}
                         </>
                     )}
                     {!isLoggedIn && (

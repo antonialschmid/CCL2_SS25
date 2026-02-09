@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dear Body – Concept</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="navbar-inner">
+
+        <div class="nav-brand">
+            DEAR BODY
+        </div>
+
+        <div class="nav-links">
+        <a href="index.html">Summary</a>
+        <a href="concept.html" class="active">Concept</a>
+        <a href="development.html">Development</a>
+        <a href="dev-diary.html">Dev Diary</a>
+        <a href="reflection.html">Reflection</a>
+        <a href="https://www.figma.com/proto/AsSVg5pDKfGXdIgeZlsy7p/CCL-DearBody"
+           target="_blank">Prototype</a>
+    </div>
+    </div>
+</nav>
+
+<main class="page">
+
+    <div class="section">
+        <h2>Project Idea</h2>
+
+        <p>
+            <em>Dear Body</em> is a poetic, blog-based web application where users can write
+            anonymous letters to their body or to specific body parts.
+            The act of writing is framed as a form of self-address, care,
+            and emotional reflection.
+        </p>
+
+        <p>
+            By removing public identity and usernames, the platform encourages
+            vulnerability without performance. Letters are not written <em>for</em>
+            others, but exist as quiet, personal statements within a shared space.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Motivation & Background</h2>
+
+        <p>
+            The project is inspired by zines, diaries, and feminist publishing practices
+            that treat writing as an intimate and political act.
+            Rather than focusing on productivity, optimisation, or visibility,
+            <em>Dear Body</em> explores digital spaces as sites of care.
+        </p>
+
+        <p>
+            Writing to the body allows users to externalise thoughts, emotions,
+            and tensions that are often difficult to articulate.
+            The web application functions as a container for these expressions,
+            rather than a system that evaluates or ranks them.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>User Flow</h2>
+
+        <p>
+            The application distinguishes between reading and writing:
+        </p>
+
+        <ul>
+            <li>Visitors can read letters without creating an account</li>
+            <li>Writing letters and resonating with others requires login</li>
+            <li>All letters are published anonymously</li>
+            <li>Logged-in users can view their own letters on their profile page</li>
+        </ul>
+
+        <p>
+            This structure lowers the barrier to engagement while preserving
+            a sense of intentionality around participation.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Design Approach</h2>
+
+        <p>
+            Visually, the project combines softness and rawness.
+            A bold pink background, red typography, pixel fonts,
+            and scanned textures reference both digital nostalgia
+            and handmade publishing.
+        </p>
+
+        <p>
+            The interface avoids dense information layouts.
+            Instead, it prioritises space, rhythm, and legibility,
+            allowing text to remain the central element.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>MVP Scope</h2>
+
+        <h3>Frontend</h3>
+        <ul>
+            <li>Login and registration flow</li>
+            <li>Form to write a letter (authentication required)</li>
+            <li>Public feed displaying all letters</li>
+            <li>Profile page showing the user’s own letters</li>
+        </ul>
+
+        <h3>Backend</h3>
+        <ul>
+            <li>Authentication endpoints (register, login)</li>
+            <li>CRUD operations for letters</li>
+            <li>Middleware to protect writing and resonating routes</li>
+        </ul>
+
+        <h3>Database</h3>
+        <ul>
+            <li>Users table (authentication data)</li>
+            <li>Letters table (content, body reference, timestamp)</li>
+        </ul>
+    </div>
+
+</main>
+<footer class="site-footer">
+    Creative Code Lab 2 · Dear Body · Antonia Schmid
+</footer>
+</body>
+</html>

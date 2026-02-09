@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dear Body – Development</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="navbar-inner">
+
+        <div class="nav-brand">
+            DEAR BODY
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">Summary</a>
+            <a href="concept.html">Concept</a>
+            <a href="development.html" class="active">Development</a>
+            <a href="dev-diary.html">Dev Diary</a>
+            <a href="reflection.html">Reflection</a>
+            <a href="https://www.figma.com/proto/AsSVg5pDKfGXdIgeZlsy7p/CCL-DearBody"
+               target="_blank">Prototype</a>
+        </div>
+
+    </div>
+</nav>
+<main class="page">
+
+    <div class="section">
+        <h2>1. Hosting Setup</h2>
+
+        <p>
+            The web application is hosted on the FH St. Pölten Campus Cloud using a Node.js
+            instance. The project is fully functional and accessible online. (Not anymore)
+        </p>
+
+        <h3>Tools & Services</h3>
+        <ul>
+            <li>Node.js backend (Express)</li>
+            <li>MySQL database hosted via FH St. Pölten</li>
+            <li>React frontend (Vite-based setup)</li>
+            <li>Campus Cloud FTP access (FileZilla)</li>
+        </ul>
+
+        <h3>Deployment Process</h3>
+        <ul>
+            <li>Built the frontend using <code>npm run build</code> (created <code>dist/</code>)</li>
+            <li>Created <code>/frontend</code> and <code>/backend</code> folders inside the Campus Cloud <code>/node</code> directory</li>
+            <li>Uploaded backend files (excluding <code>node_modules</code>) and frontend <code>dist/</code></li>
+            <li>Updated <code>app.js</code> to serve the static frontend</li>
+            <li>Adjusted all Axios requests to use the <code>/api</code> prefix</li>
+            <li>Final startup command: <code>node app.js</code></li>
+        </ul>
+    </div>
+
+    <!-- ================= SOURCE CODE ================= -->
+
+    <div class="section">
+        <h2>2. Source Code Submission</h2>
+
+        <ul>
+            <li>ZIP file of the complete project submitted via eCampus</li>
+            <li>Git repository containing the full source code</li>
+            <li>Repository includes a README explaining project purpose, setup and key features</li>
+        </ul>
+
+        <p>
+            I followed Git best practices as much as possible, although I sometimes forgot
+            to commit in between (see Dev Diary).
+        </p>
+    </div>
+
+    <!-- ================= CODE DOC ================= -->
+
+    <div class="section">
+        <h2>3. Code Documentation</h2>
+
+        <p>
+            The codebase is structured and commented to remain understandable and maintainable.
+        </p>
+
+        <ul>
+            <li>Clear and consistent variable naming (e.g. <code>resonateCount</code>, <code>isAdmin</code>)</li>
+            <li>Each file has a focused responsibility</li>
+            <li>Controllers handle business logic</li>
+            <li>Routes define API endpoints</li>
+            <li>Models manage database access</li>
+            <li>Frontend split into <code>pages/</code> and <code>components/</code></li>
+            <li>Complex functions include inline comments</li>
+            <li>Reusable CSS classes across components</li>
+        </ul>
+    </div>
+
+    <!-- ================= ARCHITECTURE ================= -->
+
+    <div class="section">
+        <h2>4. Project Architecture</h2>
+
+        <pre>
+/node
+ ├── backend
+ │   ├── routes        (users, letters)
+ │   ├── controllers   (business logic)
+ │   ├── models        (MySQL queries)
+ │   ├── services      (JWT auth, DB connection)
+ │   └── app.js
+ └── frontend
+     ├── assets
+     ├── pages
+     ├── components
+     ├── styles
+     └── index.html
+        </pre>
+    </div>
+
+    <!-- ================= USER INTERACTION ================= -->
+
+    <div class="section">
+        <h2>5. User Interaction Overview</h2>
+
+        <p>
+            <em>Dear Body</em> is a poetic blog-based web application where users can write
+            anonymous letters to their body or body parts as a form of reflection and
+            emotional release.
+        </p>
+
+        <h3>User Flow</h3>
+        <ul>
+            <li>Landing page → read or write letters</li>
+            <li>Reading letters is public</li>
+            <li>Writing and resonating requires login</li>
+            <li>Letters are stored in the database</li>
+            <li>All letters appear anonymous to other users</li>
+            <li>Logged-in users can view their own letters</li>
+        </ul>
+
+        <h3>Database Design</h3>
+        <ul>
+            <li><strong>usersDearBody</strong>: id, username, email, password_hash</li>
+            <li><strong>lettersDearBody</strong>: id, user_id, title, body_part, content, created_at, resonate_count</li>
+        </ul>
+    </div>
+
+    <!-- ================= MVP ================= -->
+
+    <div class="section">
+        <h2>6. MVP Scope</h2>
+
+        <h3>Frontend</h3>
+        <ul>
+            <li>Login and registration flow</li>
+            <li>Form to write letters (auth-protected)</li>
+            <li>Public feed of letters</li>
+            <li>Profile page with user’s own letters</li>
+        </ul>
+
+        <h3>Backend</h3>
+        <ul>
+            <li>Authentication endpoints</li>
+            <li>CRUD functionality for letters</li>
+            <li>Protected routes using middleware</li>
+        </ul>
+
+        <h3>Database</h3>
+        <ul>
+            <li>Two core tables: users and letters</li>
+        </ul>
+    </div>
+
+    <!-- ================= LIMITATIONS ================= -->
+
+    <div class="section">
+        <h2>Known Issues & Limitations</h2>
+        <ul>
+            <li>No pagination (letters are listed continuously)</li>
+            <li>No edit/delete functionality for user letters</li>
+            <li>No advanced accessibility features implemented</li>
+        </ul>
+
+        <p>
+            Overall, I am very satisfied with the final result. While it does not fully
+            match my initial design vision, this was a conscious trade-off in favour of
+            functionality and completion.
+        </p>
+    </div>
+
+    <!-- ================= ACCESSIBILITY ================= -->
+
+    <div class="section">
+        <h2>Accessibility (Optional)</h2>
+        <p>
+            No specific WCAG accessibility features were implemented. Therefore,
+            this project is not submitted for accessibility bonus points.
+        </p>
+    </div>
+
+</main>
+
+<footer class="site-footer">
+    Creative Code Lab 2 · Dear Body · Antonia Schmid
+</footer>
+
+</body>
+</html>

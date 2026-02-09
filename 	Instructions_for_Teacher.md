@@ -7,17 +7,154 @@ How to clone your repository:
 git clone: https://git.nwt.fhstp.ac.at/ccl_cc241073/ss2025_ccl_cc241073.git
 
 
-Backend setup
+### 📦 Global Prerequisites
 
+Make sure the following tools are installed before proceeding:
+
+```bash
+# Required:
+Node.js (v18 or newer)
+NPM (comes with Node)
+
+# Optional (if hosting a local DB):
+MySQL Server
+
+# Optional (for managing environment variables easily):
+npm install -g dotenv-cli
+```
+
+---
+
+## 📁 Backend Setup
+
+### 1. Navigate to the backend folder:
+
+```bash
+cd backend
+```
+
+### 2. Install dependencies:
+
+```bash
+npm install
+```
+
+### 3. Dependencies being installed:
+
+```bash
+express
+mysql2
+dotenv
+cors
+cookie-parser
+jsonwebtoken
+bcryptjs
+```
+
+You can also install them manually:
+
+```bash
+npm install express mysql2 dotenv cors cookie-parser jsonwebtoken bcryptjs
+```
+
+### 4. Create a `.env` file:
+
+Create a file called `.env` inside the backend directory:
+
+```env
+DB_HOST=your-db-host
+DB_USER=your-db-username
+DB_PASSWORD=your-db-password
+DB_NAME=your-database-name
+JWT_SECRET=your-secret-key
+```
+
+### 5. Start the backend:
+
+```bash
+npm start
+# or
+node app.js
+```
+
+---
+
+## 📁 Frontend Setup
+
+### 1. Navigate to the frontend folder:
+
+```bash
+cd ../frontend
+```
+
+### 2. Install dependencies:
+
+```bash
+npm install
+```
+
+### 3. Dependencies being installed:
+
+```bash
+react
+react-dom
+react-router-dom
+axios
+```
+
+You can also install them manually:
+
+```bash
+npm install react react-dom react-router-dom axios
+```
+
+### 4. Start the frontend (development):
+
+```bash
+npm run dev
+```
+
+### Or build it for production:
+
+```bash
+npm run build
+```
+
+---
+
+## 🌐 Hosting on Campus Cloud (Frontend + Backend in one instance)
+
+In `backend/app.js`, make sure the following is added **after** all routes:
+
+```js
+const path = require("path");
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
+```
+
+Then build the frontend and copy the `dist/` folder into `frontend/` before deploying your app.
+
+---
+
+## ✅ Final Setup Recap
+
+```bash
+# Backend
 cd backend
 npm install
-node app.js
+npm start
 
- Frontend setup (if running locally only)
-
+# Frontend
 cd ../frontend
 npm install
-npm run dev
+npm run dev   # or npm run build
+```
+
+Make sure `.env` is properly configured for DB access.
+
+
 
 
 Environment setup (required)
